@@ -47,7 +47,8 @@ namespace LinqExamples.LookupExamples
                 PrevStatus = null
             });
 
-            var lookupResult = request.Documents.ToLookup<BatchStateChangeDocument, UpdateCommand, string>(d => new UpdateCommand
+            // to group correctly using explicit type this type has to implement GetHashCode and Equals
+            ILookup<UpdateCommand, string> lookupResult = request.Documents.ToLookup<BatchStateChangeDocument, UpdateCommand, string>(d => new UpdateCommand
             {
                 ActionId = d.ActionId,
                 ActionType = d.ActionType,
@@ -68,11 +69,11 @@ namespace LinqExamples.LookupExamples
             }, d => d.Id);
 
             int index = 0;
-            foreach(var item in lookupResult)
+            foreach(IGrouping<UpdateCommand, string> item in lookupResult)
             {
                 Console.WriteLine($"---Command{index}---");
                 UpdateCommand command = item.Key;
-                foreach (var id in item)
+                foreach (string id in item)
                 {
                     Console.WriteLine(id);
                 }
@@ -83,7 +84,6 @@ namespace LinqExamples.LookupExamples
             foreach (var item in lookupResultAnonymousType)
             {
                 Console.WriteLine($"---Command{index}---");
-                //UpdateCommand command = item.Key;
                 foreach (var id in item)
                 {
                     Console.WriteLine(id);

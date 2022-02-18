@@ -32,5 +32,21 @@ namespace LinqExamples
         /// New status.
         /// </summary>
         public string Status { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is UpdateCommand command &&
+                   PrevActionId == command.PrevActionId &&
+                   PrevActionType == command.PrevActionType &&
+                   ActionId == command.ActionId &&
+                   ActionType == command.ActionType &&
+                   PrevStatus == command.PrevStatus &&
+                   Status == command.Status;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(PrevActionId, PrevActionType, ActionId, ActionType, PrevStatus, Status);
+        }
     }
 }
