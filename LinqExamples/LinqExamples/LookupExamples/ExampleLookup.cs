@@ -79,9 +79,17 @@ namespace LinqExamples.LookupExamples
                 index++;
             }
 
-            var result = request.Documents.GroupBy(
-                    d => new { d.ActionId, d.ActionType, d.Status, d.PrevActionId, d.PrevActionType, d.PrevStatus }
-                );
+            index = 0;
+            foreach (var item in lookupResultAnonymousType)
+            {
+                Console.WriteLine($"---Command{index}---");
+                //UpdateCommand command = item.Key;
+                foreach (var id in item)
+                {
+                    Console.WriteLine(id);
+                }
+                index++;
+            }
         }
     }
 }
