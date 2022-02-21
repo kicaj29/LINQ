@@ -73,9 +73,11 @@ namespace LinqExamples.LookupExamples
             {
                 Console.WriteLine($"---Command{index}---");
                 UpdateCommand command = item.Key;
+                command.Ids = new List<string>();
                 foreach (string id in item)
                 {
                     Console.WriteLine(id);
+                    command.Ids.Add(id);
                 }
                 index++;
             }

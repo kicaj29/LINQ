@@ -31,7 +31,7 @@ namespace LinqExamples.GroupByExamples
                 ActionId = "OCR-111",
                 ActionType = "OCR",
                 Status = "Queued",
-                PrevActionId = null,
+                PrevActionId = string.Empty,
                 PrevActionType = null,
                 PrevStatus = null
             });

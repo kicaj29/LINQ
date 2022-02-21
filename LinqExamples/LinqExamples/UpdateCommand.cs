@@ -8,6 +8,7 @@ namespace LinqExamples
 {
     public class UpdateCommand
     {
+        public List<string> Ids { get; set; }
         /// <summary>
         /// Id of previous action.
         /// </summary>
